@@ -1,8 +1,10 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
+
+using namespace std;
 
 void operate(char op, double firstOperand, double secondOperand);
-int keepGoing(void);
+bool keepGoing(void);
 
 int main()
 {
@@ -15,75 +17,75 @@ int main()
 
         do
         {
-            std::cout << "Enter an operator (+,-,/,*,^)\n";
-            std::cin >> op;
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            cout << "Enter an operator (+,-,/,*,^)\n";
+            cin >> op;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         } while (op != '+' && op != '-' && op != '/' && op != '*' && op != '^');
 
-        std::cout << "Enter 2 operands (any int)\n";
-        std::cin >> firstOperand >> secondOperand;
+        cout << "Enter 2 operands (any int)\n";
+        cin >> firstOperand >> secondOperand;
 
-        while (!std::cin)
+        while (!cin)
         {
-            std::cout << "Thats not an int, please enter an integer (both numbers have been cleared): \n";
-            std::cin.clear();
-            std::cin.ignore();
-            std::cin >> firstOperand >> secondOperand;
+            cout << "Thats not an int, please enter an integer (both numbers have been cleared): \n";
+            cin.clear();
+            cin.ignore();
+            cin >> firstOperand >> secondOperand;
         }
 
         operate(op, firstOperand, secondOperand);
-        keepGoing();
 
-    } while (keepGoing != 0);
+    } while (keepGoing());
 }
 
 void operate(char op, double firstOperand, double secondOperand)
 {
-
+    
     switch (op)
     {
     case '+':
-        std::cout << firstOperand << " added to " << secondOperand << " is equal to: " << firstOperand + secondOperand << "\n";
+        cout << firstOperand << " added to " << secondOperand << " is equal to: " << firstOperand + secondOperand << "\n";
         break;
     case '-':
-        std::cout << firstOperand << " subtracted from " << secondOperand << " is equal to: " << firstOperand - secondOperand << "\n";
+        cout << firstOperand << " subtracted from " << secondOperand << " is equal to: " << firstOperand - secondOperand << "\n";
         break;
     case '/':
-        std::cout << firstOperand << " divided by " << secondOperand << " is equal to: " << firstOperand / secondOperand << "\n";
+        cout << firstOperand << " divided by " << secondOperand << " is equal to: " << firstOperand / secondOperand << "\n";
         break;
     case '*':
-        std::cout << firstOperand << " multiplied by " << secondOperand << " is equal to: " << firstOperand * secondOperand << "\n";
+        cout << firstOperand << " multiplied by " << secondOperand << " is equal to: " << firstOperand * secondOperand << "\n";
         break;
     case '^':
-        std::cout << firstOperand << " raised to " << secondOperand << " is equal to: " << pow(firstOperand, secondOperand) << "\n";
+        cout << firstOperand << " raised to " << secondOperand << " is equal to: " << pow(firstOperand, secondOperand) << "\n";
         break;
     default:
-        std::cout << "Error\n";
+        cout << "Error\n";
         break;
 
     }
 }
 
-int keepGoing(void)
+bool keepGoing(void)
 {
     char choice;
 
     do
     {
 
-    std::cout << "Would you like to calculate again? (y/n)\n";
-    std::cin >> choice;
+    cout << "Would you like to calculate again? (y/n)\n";
+    cin >> choice;
 
     } while (choice != 'y' && choice != 'Y' && choice != 'n' && choice != 'N');
 
     if (choice == 'y' || choice == 'Y')
     {
-        return 1;
+        return true;
     }
     else if (choice == 'n' || choice == 'N')
     {
-        exit(0);
+        return false;
     }
     
+    return false;
 }
